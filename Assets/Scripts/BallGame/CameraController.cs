@@ -5,6 +5,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
+    public GameObject player;
+    public GameObject shadowUI;
+    public GameObject targetUI;
+    public float margen = 50f;
+
+
+    public BallGameManager gameManager;
 
     public float distanceSpeed;
     public Vector2 distanceLimits;
@@ -21,6 +28,7 @@ public class CameraController : MonoBehaviour
         cam = Camera.main;
         Zoom(10);
         initialRotation = transform.localEulerAngles;
+       
     }
     public void Zoom(float value)
     {
@@ -46,6 +54,34 @@ public class CameraController : MonoBehaviour
     {
         this.target = target;
     }
+
+    private void Update()
+    {
+        BallShadow();
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(gameManager.currentTarget.transform.position);
+
+        if (screenPos.z < 0)
+        {
+            screenPos.x = Screen.width - screenPos.x;
+            screenPos.y = Screen.height - screenPos.y;
+        }
+
+        // Verificar si el objeto está fuera de la vista
+        bool fueraDeVista = screenPos.x < margen || screenPos.x > Screen.width - margen ||
+                            screenPos.y < margen || screenPos.y > Screen.height - margen;
+
+        // Activar o desactivar el icono
+        targetUI.gameObject.SetActive(fueraDeVista);
+
+        if (fueraDeVista)
+        {
+            // Limitar la posición del indicador para que se mantenga dentro de la pantalla
+            float posX = Mathf.Clamp(screenPos.x, margen, Screen.width - margen);
+            float posY = Mathf.Clamp(screenPos.y, margen, Screen.height - margen);
+            targetUI.transform.position = new Vector3(posX, posY, 0);
+        }
+    }
     void LateUpdate()
     {
         switch (target)
@@ -64,4 +100,27 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredCenter, centerSpeed * Time.deltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(initialRotation.x, desiredRotation, initialRotation.z), rotationSpeed * Time.deltaTime);
     }
+
+    public void BallShadow()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(cam.transform.position, (player.transform.position - cam.transform.position).normalized);
+        Debug.DrawLine(cam.transform.position, player.transform.position, Color.yellow);
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+             if (hit.collider.tag == "Player")
+            {
+                shadowUI.SetActive(false);
+
+                Debug.Log("Player hit");
+            }
+            else
+            {
+                shadowUI.SetActive(true);
+                Debug.Log("Else hit");
+            }
+        }
+    }
+
 }

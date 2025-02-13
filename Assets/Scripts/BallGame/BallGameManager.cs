@@ -72,4 +72,6 @@ public class BallGameManager : MonoBehaviour
     {
         Time.timeScale = pause ? 0 : 1;
     }
+
+
 }
