@@ -14,11 +14,20 @@ public class WorldToUI : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 pos = cam.WorldToViewportPoint(target.position);
-        
+
+        if (pos.z < 0)
+        {
+            pos.x = 1f - pos.x;
+            pos.y = 1f - pos.y;
+        }
+
+        float padding = 0.05f;
+        pos.x = Mathf.Clamp(pos.x, padding, 1 - padding);
+        pos.y = Mathf.Clamp(pos.y, padding, 1 - padding);
+
         rectTransform.anchorMin = pos;
         rectTransform.anchorMax = pos;
     }
