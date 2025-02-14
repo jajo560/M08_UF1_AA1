@@ -10,11 +10,19 @@ public class CameraInput : MonoBehaviour
     CameraController controller;
     public Camera thisCamera;
     UIvsGameInput input;
+    private float mouseScroll;
+    CameraController cameraController;
+   
+
     void Start()
     {
         controller = GetComponent<CameraController>();
         input = new UIvsGameInput();
         input.Player.Enable();
+        input.Player.MouseScroll.performed += x => mouseScroll = x.ReadValue<float>();
+        cameraController = GetComponent<CameraController>();
+        
+        
 
     }
 
@@ -22,23 +30,25 @@ public class CameraInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (input.Player.MouseScroll.ReadValue<float>() > 0) 
+        if (mouseScroll > 0) 
         {
            Zoomin();
+
         }
-        if (input.Player.MouseScroll.ReadValue<float>() < 0) 
+        if (mouseScroll < 0) 
         {
             Zoomout();
         }
+       
     }
 
     public void Zoomin()
     {
-        thisCamera.orthographicSize++;
+        cameraController.Zoom(-1f);
     }
 
     public void Zoomout()
     {
-        thisCamera.orthographicSize--;
+        cameraController.Zoom(1f);
     }
 }

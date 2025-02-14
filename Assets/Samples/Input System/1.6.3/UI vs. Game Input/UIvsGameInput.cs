@@ -101,9 +101,9 @@ public partial class @UIvsGameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""MouseScroll"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""cfb5593c-4b83-4645-b391-500b9422607f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -333,7 +333,7 @@ public partial class @UIvsGameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7f705edf-b88c-40a9-889c-f12d7b172ab6"",
-                    ""path"": ""<Mouse>/scroll/down"",
+                    ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
