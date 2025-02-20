@@ -3042,6 +3042,7 @@ MonoBehaviour:
   button: {fileID: 1658560024}
   scrollPanel: {fileID: 797500274}
   backButton: {fileID: 971573318}
+  joystick: {fileID: 1219829520}
   viewBall: {fileID: 138487008}
   viewTarget: {fileID: 1744154131}
   viewMiddlePoint: {fileID: 39686576}
@@ -4094,11 +4095,11 @@ RectTransform:
   m_Father: {fileID: 55252329}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -228, y: 340}
-  m_SizeDelta: {x: 139.786, y: 110.636}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 477, y: 0}
+  m_SizeDelta: {x: 139.78601, y: 110.63599}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &986265198
 GameObject:
   m_ObjectHideFlags: 0
