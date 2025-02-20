@@ -2217,9 +2217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 330585545}
-  player: {fileID: 1757598273}
-  shadowUI: {fileID: 1588200038}
-  targetUI: {fileID: 1566125393}
   margen: 50
   gameManager: {fileID: 1622400531}
   distanceSpeed: 5
@@ -2255,6 +2252,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb4973d89bd9b2448862671987c8db80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisCamera: {fileID: 330585545}
+  mouseDelta: {x: 0, y: 0}
+  mouseX: 0
+  mouseY: 0
+  rotationVelocity: 0.25
+  overUi: 0
 --- !u!1 &934916945 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4796031842033542315, guid: 545242d778260c14badb2d769c919bb9,
@@ -3234,13 +3237,14 @@ GameObject:
   - component: {fileID: 1566125394}
   - component: {fileID: 1566125396}
   - component: {fileID: 1566125395}
+  - component: {fileID: 1566125397}
   m_Layer: 5
   m_Name: TargetUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1566125394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3256,10 +3260,10 @@ RectTransform:
   m_Father: {fileID: 55252329}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 114.5, y: 127.45}
+  m_AnchorMin: {x: 0.46030536, y: 0.42229736}
+  m_AnchorMax: {x: 0.5393591, y: 0.57900006}
+  m_AnchoredPosition: {x: 0.5, y: -0.5}
+  m_SizeDelta: {x: -0.5, y: 0.44999695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1566125395
 MonoBehaviour:
@@ -3299,6 +3303,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566125393}
   m_CullTransparentMesh: 1
+--- !u!114 &1566125397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566125393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 926547265}
+          m_TargetAssemblyTypeName: CameraInput, Assembly-CSharp
+          m_MethodName: OverUi
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: IsMouseOverUi
+            m_BoolArgument: 0
+          m_CallState: 1
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 926547265}
+          m_TargetAssemblyTypeName: CameraInput, Assembly-CSharp
+          m_MethodName: NotOverUi
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: IsMouseOverUi
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &1584169822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,11 +3560,11 @@ GameObject:
   - component: {fileID: 1588200040}
   m_Layer: 5
   m_Name: ShadowUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1588200039
 RectTransform:
   m_ObjectHideFlags: 0
