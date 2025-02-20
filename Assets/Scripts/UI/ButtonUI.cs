@@ -6,9 +6,12 @@ public class ButtonUI : MonoBehaviour
 {
     public BallController ballController;
     public CameraController cameraController;
+
     public GameObject button;
     public GameObject scrollPanel;
     public GameObject backButton;
+    public GameObject joystick;
+
     public GameObject viewBall;
     public GameObject viewTarget;
     public GameObject viewMiddlePoint;
@@ -27,15 +30,20 @@ public class ButtonUI : MonoBehaviour
 
     public void ScrollPanel()
     {
+        Time.timeScale = 0f;
+        joystick.SetActive(false);
         button.SetActive(true);
         scrollPanel.SetActive(false);
         backButton.SetActive(true);
+
     }
     public void ScrollPanelActive()
     {
+        joystick.SetActive(true);
         button.SetActive(false);
         scrollPanel.SetActive(true);
         backButton.SetActive(false);
+        Time.timeScale = 1f;
 
     }
     public void ChangeViewModeTarget()

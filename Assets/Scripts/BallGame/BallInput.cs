@@ -19,7 +19,9 @@ public class BallInput : MonoBehaviour
     {
         if (newInputSystem)
         {
-            controller.Move(input.Player.Move.ReadValue<Vector2>());
+            controller.Move(input.Player.Move.ReadValue<Vector2>()); 
+            Vector2 moveInput = DragTester.inputVector;
+            controller.Move(moveInput);
             if (input.Player.Jump.IsPressed())
             {
                 controller.Jump();

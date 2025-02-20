@@ -5,30 +5,56 @@ using UnityEngine.EventSystems;
 
 public class DragTester : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    public RectTransform circleSpace;
+    public RectTransform innerCircle;
+
+    public static Vector2 inputVector;
+    public GameObject joystick;
+    private Vector2 originalPosition;
+
+    void Start()
+    {
+        originalPosition = circleSpace.anchoredPosition;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        joystick.transform.position = eventData.position;
+        OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        CalculateInnerCirclePosition(eventData.position);
+        CalculateInputVector();
+        CalculateInnerCircleRotation();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        innerCircle.anchoredPosition = Vector2.zero;
+        innerCircle.localRotation = Quaternion.identity;
+        inputVector = Vector2.zero;
+    }
+    private void CalculateInnerCirclePosition(Vector2 position)
+    {
+        Vector2 direccionPosition = position - (Vector2)circleSpace.position;
+        if (direccionPosition.magnitude > circleSpace.rect.width / 2f)
+            direccionPosition = direccionPosition.normalized * circleSpace.rect.width / 2f;
+
+        innerCircle.anchoredPosition = direccionPosition;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void CalculateInnerCircleRotation()
     {
-        
+        innerCircle.localRotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, inputVector));
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CalculateInputVector()
     {
-        
+        inputVector = innerCircle.anchoredPosition / (circleSpace.rect.size / 2f);
     }
+
+  
+
 }
