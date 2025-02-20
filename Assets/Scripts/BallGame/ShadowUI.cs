@@ -8,7 +8,6 @@ public class ShadowUI : MonoBehaviour
 
     public GameObject player;
     public GameObject shadowUI;
-    public GameObject targetUI;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +23,7 @@ public class ShadowUI : MonoBehaviour
     }
     public void BallShadow()
     {
-        bool occluded = false;
+        bool seen = false;
         RaycastHit hit;
         Vector3 direction = (player.transform.position - cam.transform.position).normalized;
         Ray ray = new Ray(cam.transform.position, direction);
@@ -34,7 +33,7 @@ public class ShadowUI : MonoBehaviour
         {
             if (hit.collider.tag != "Player")
             {
-                occluded = true;
+                seen = true;
             }
         }
 
@@ -50,9 +49,9 @@ public class ShadowUI : MonoBehaviour
         viewportPos.x = Mathf.Clamp(viewportPos.x, padding, 1 - padding);
         viewportPos.y = Mathf.Clamp(viewportPos.y, padding, 1 - padding);
 
-        shadowUI.SetActive(occluded);
+        shadowUI.SetActive(seen);
 
-        if (occluded)
+        if (seen)
         {
             RectTransform rt = shadowUI.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(viewportPos.x, viewportPos.y);
