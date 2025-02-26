@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class DragTester : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -9,8 +10,10 @@ public class DragTester : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public RectTransform innerCircle;
 
     public static Vector2 inputVector;
-    public GameObject joystick;
+    public RectTransform joystick;
     private Vector2 originalPosition;
+
+    public bool isStatic = false;
 
     void Start()
     {
@@ -19,8 +22,11 @@ public class DragTester : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        joystick.transform.position = eventData.position;
-        OnDrag(eventData);
+        if (isStatic == false)
+        {
+            joystick.anchoredPosition = eventData.position;
+            OnDrag(eventData);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
