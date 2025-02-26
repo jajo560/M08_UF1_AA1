@@ -10,6 +10,8 @@ public class ButtonUI : MonoBehaviour
 
     public GameObject anythingPanel;
     public GameObject settingsPanel;
+    public GameObject biggerPanel;
+    public GameObject joystick;
 
     public GameObject viewBall;
     public GameObject viewTarget;
@@ -31,6 +33,7 @@ public class ButtonUI : MonoBehaviour
         viewBall.SetActive(false);
         settingsPanel.SetActive(true);
         anythingPanel.SetActive(false);
+        biggerPanel.SetActive(false);
     }
 
     public void JumpButton()
@@ -88,11 +91,15 @@ public class ButtonUI : MonoBehaviour
         Vector2 target;
         if (isShown)
         {
+            joystick.SetActive(true);
             target = hiddenPosition;
+            biggerPanel.SetActive(false);
             Time.timeScale = 1f;
         }
         else
         {
+            joystick.SetActive(false);
+            biggerPanel.SetActive(true);
             target = shownPosition;
         }
 
